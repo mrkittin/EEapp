@@ -88,7 +88,7 @@ public class Location {
         HashMap<String, String> newMap = new HashMap<String, String>();
 
         for (String string : oldMap.keySet()) {
-            if (!string.equals("page") & !string.equals("rows")) {
+            if (!string.equals("page") && !string.equals("rows") && !oldMap.getFirst(string).isEmpty()) {
                 newMap.put(string, oldMap.getFirst(string));
             }
         }
