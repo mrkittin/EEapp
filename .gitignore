@@ -1,4 +1,9 @@
+.DS_Store
+db.properties
 *.class
+# *.iml
+.idea/*
+out/*
 
 # Package Files #
 *.jar

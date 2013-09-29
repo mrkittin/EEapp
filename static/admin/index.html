@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">
+    <meta name="description" content="easyui help you build your web page easily!">
+    <title>Locations</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.edatagrid.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#dg').edatagrid({
+                url: '/api/location/getAllLocations',
+                saveUrl: '/api/location/addLocation',
+                updateUrl: '/api/location/editLocation',
+                destroyUrl: '/api/location/deleteLocation'
+            });
+        });
+
+        function doSearch(){
+            $('#dg').datagrid('load',{
+                name: $('#nameSearch').val(),
+                city: $('#citySearch').val()
+            });
+        }
+
+        function resetSearch() {
+            $('#nameSearch').val('');
+            $('#citySearch').val('');
+            doSearch();
+        }
+    </script>
+</head>
+<body>
+<div class="demo-info" style="margin-bottom:10px">
+    <div class="demo-tip icon-tip">&nbsp;</div>
+    <div>Double click the row to begin editing.</div>
+</div>
+
+<table id="dg" title="Locations" style="width:700px;height:400px"
+       toolbar="#toolbar" pagination="true" idField="id"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Name</th>
+        <th field="lat" width="50" editor="{type:'validatebox',options:{required:true}}">Latitude</th>
+        <th field="lng" width="50" editor="{type:'validatebox',options:{required:true}}">Longtitude</th>
+        <th field="city" width="50" editor="{type:'text'}">City</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+    <input id="nameSearch" placeholder="Name" style="line-height:22px;border:1px solid #ccc">
+    <input id="citySearch" placeholder="City" style="line-height:22px;border:1px solid #ccc">
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="resetSearch()">Reset</a>
+</div>
+
+</body>
+</html>
