@@ -1,7 +1,6 @@
 package app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -39,6 +38,19 @@ public class Location {
     @FormParam("city")
     @JsonProperty("city")
     private String city;
+
+    @FormParam("country")
+    @JsonProperty("country")
+    private String country;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
 
     public String getCity() {
         return city;
@@ -95,7 +107,7 @@ public class Location {
         return m.convertValue(newMap, Location.class);
     }
 
-    private HashMap<String, String> asMap() {
+    public HashMap<String, String> asMap() {
         ObjectMapper m = new ObjectMapper();
         return m.convertValue(this, TypeFactory.defaultInstance().constructMapType(HashMap.class, String.class, String.class));
     }

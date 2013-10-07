@@ -1,0 +1,12 @@
+.autoSizeInput {
+    height: 20px;
+    width: 90px;
+    min-width: 90px;
+    max-width: 300px;
+    transition: width 0.05s;
+    font-family: Helvetica,serif;
+    font-size: 10pt;
+    line-height:22px;
+    border:1px solid #ccc;
+    margin-right:10px;
+}

@@ -4,6 +4,8 @@ import app.dao.DAOFactory;
 import app.dao.LocationDAO;
 import app.model.Location;
 import app.model.LocationsWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import org.jboss.resteasy.annotations.Form;
@@ -17,6 +19,15 @@ public class locationService {
 
     private static DAOFactory mongodbFactory = DAOFactory.getDAOFactory(DAOFactory.MONGODB);
     private static LocationDAO locationDAO = mongodbFactory.getLocationDAO();
+
+    @GET
+    @Path("/getSupportedFields")
+    @Produces(MediaType.APPLICATION_JSON)
+    public HashMap<String, String> getSupportedFields() throws JsonProcessingException {
+        Location l = new Location();
+        l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude"); l.setLng("Longitude");
+        return l.asMap();
+    }
 
     @POST
     @Path("/getLocationById/{id}")
