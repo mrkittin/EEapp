@@ -10,39 +10,30 @@
     <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery.autosize.input.js"></script>
     <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.edatagrid.js"></script>
+    <!--<script type="text/javascript" src="/js/jquery.edatagrid.js"></script>-->
     <script type="text/javascript" src="/js/my.js"></script>
 </head>
 <body>
-<!--<div class="demo-info" style="margin-bottom:10px">-->
-<!--<div class="demo-tip icon-tip">&nbsp;</div>-->
-<!--<div>Double click the row to begin editing.</div>-->
-<!--</div>-->
 
 <table id="dg" title="Locations" style="width:700px;height:400px"
        toolbar="#toolbar" pagination="true" idField="id"
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Name</th>
-        <!--<th field="lat" width="50" editor="{type:'validatebox',options:{required:true}}">Latitude</th>-->
-        <!--<th field="lng" width="50" editor="{type:'validatebox',options:{required:true}}">Longitude</th>-->
-        <th field="city" width="50" editor="{type:'text'}">City</th>
+        <th field="name" width="50">Name</th>
+        <th field="city" width="50">City</th>
     </tr>
     </thead>
 </table>
 <div id="toolbar">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+    <a id="addBtn" class="easyui-linkbutton" iconCls="icon-add-red" plain="true">New</a>
     <input id="nameSearch" placeholder="Name" style="line-height:22px;border:1px solid #ccc">
     <input id="citySearch" placeholder="City" style="line-height:22px;border:1px solid #ccc">
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="resetSearch()">Reset</a>
+    <a id="searchBtn" class="easyui-linkbutton" plain="true">Search</a>
+    <a id="resetSearchBtn" class="easyui-linkbutton" plain="true">Reset</a>
 </div>
 <br>
-<div id="addFields" style="padding:2px; line-height: 28px; border:1px solid #95B8E7; display:none">
+<div id="addFields" style="overflow: auto; padding:2px; border:1px solid #95B8E7; display:none">
 
 </div>
 

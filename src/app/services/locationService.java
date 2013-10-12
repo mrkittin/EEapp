@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import org.jboss.resteasy.annotations.Form;
+import org.jboss.resteasy.specimpl.ResteasyHttpHeaders;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -20,12 +21,14 @@ public class locationService {
     private static DAOFactory mongodbFactory = DAOFactory.getDAOFactory(DAOFactory.MONGODB);
     private static LocationDAO locationDAO = mongodbFactory.getLocationDAO();
 
+    @Context org.jboss.resteasy.spi.HttpResponse response;
+
     @GET
     @Path("/getSupportedFields")
     @Produces(MediaType.APPLICATION_JSON)
     public HashMap<String, String> getSupportedFields() throws JsonProcessingException {
         Location l = new Location();
-        l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude"); l.setLng("Longitude");
+        l.setId("Id"); l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude"); l.setLng("Longitude");
         return l.asMap();
     }
 
@@ -72,23 +75,26 @@ public class locationService {
 
     @POST
     @Path("/addLocation")
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Location addLocation (@Form Location location) {
+    public String addLocation (@Form Location location) throws JsonProcessingException {
 
+        if (location.getId().isEmpty()) location.setId(null);
         //update Location with id returned from db
         location.setId(locationDAO.addLocation(location));
-        return location;
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(location);
     }
 
     @POST
     @Path("/editLocation")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
-    public Location editLocation (@Form Location location) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String editLocation (@Form Location location) throws JsonProcessingException {
 
         locationDAO.updateLocation(location);
-        return locationDAO.getLocationById(location.getId());
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(locationDAO.getLocationById(location.getId()));
     }
 
     private String safeSave(String string) {
