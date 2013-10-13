@@ -1,5 +1,6 @@
 $(function(){
     $datagrid = $('#dg');
+    $addLocInput = $('#addLocInput');
     $addFields = $('#addFields');
     suppLocFields = {};
     suppLocFields_values = [];
@@ -23,13 +24,25 @@ $(function(){
     $datagrid.datagrid({
         onSelect: function(rowIndex, rowData){
             showDetailsFor(rowIndex, rowData);
+            $addLocInput.css('display', 'none');
         },
-        onLoadSuccess: function() {$addFields.css('display', 'none'); $datagrid.datagrid('unselectAll');}
+        onLoadSuccess: function() {
+            $addLocInput.css('display', 'none');
+            $addFields.css('display', 'none');
+            $datagrid.datagrid('unselectAll');}
     });
+    $('.panel.datagrid').css('float', 'left').css('margin-bottom', '8px').css('margin-right', '8px');
+
+    $addLocInput.autosizeInput();
+    $addLocInput.geocomplete();
+    $addLocInput.css('height', '20px').css('border', '1px solid #ccc').css('margin-bottom', '8px').css('margin-left', '0px');
 });
 
 function addNew() {
     showDetailsFor(null, null);
+    $addLocInput.css('display', 'inline-block');
+    $datagrid.datagrid('unselectAll');
+    $('#destroyBtnWrapper').css('display', 'none');
 }
 
 function doSearch(){
@@ -161,11 +174,10 @@ function showDetailsFor(rowIndex, rowData) {
     addNewBlockThatMightBecomeAField();
     addDestroyButton();
     addSaveButton();
-    addWrapperForDateModified();
+    moveDateModified();
 }
 
-function addWrapperForDateModified() {
-    //$("<span style='display: inline-block; float:left' id='dateModifiedWrapper'>").appendTo($addFields_form);
+function moveDateModified() {
     $('#date_modifiedWrapper').appendTo($('#statusesSet'));
 }
 
@@ -188,6 +200,7 @@ function addWrapperWithSpanAndInputFor(name, withValue) {
 
 function addEmptyBlockWithFormForEditingOrAddingLocations(url) {
     $addFields.css('display', 'block');
+    $addFields.css('clear', 'both');
     $addFields.html('');
 
     $('<form/>', {
@@ -209,13 +222,14 @@ function addEmptyBlockWithFormForEditingOrAddingLocations(url) {
 
     createFieldset('inputsSet', 'Editables', 'block', 'top');
     createFieldset('statusesSet', 'Statuses', 'inline', 'bottom');
+    $('#statusesSet').append('<input id="dummy01" style="height: 26px; width: 1px; border: 0px; padding: 0px; visibility: hidden;">');
     createFieldset('actionsSet', 'Actions', 'inline', 'bottom');
 }
 
 function createFieldset(id, legend, display, verticalAlign) {
     $('<fieldset/>', {
         id: id,
-        style: 'border: 1px dotted #cccccc; display: ' + display + '; vertical-align: ' + verticalAlign
+        style: 'margin-top:3px; margin-bottom:3px; border: 1px dotted #cccccc; display: ' + display + '; vertical-align: ' + verticalAlign
     }).appendTo($addFields_form);
     $("<legend style='color: #ccc'>" + legend + "</legend>").appendTo($('#'+id));
 }
