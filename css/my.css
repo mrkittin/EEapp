@@ -16,3 +16,11 @@
 .icon-add-red{
     background:url('icons/edit_add_red.png') no-repeat center center;
 }
+
+.map_canvas {
+    width: 600px;
+    height: 358px;
+    margin: 0 0 10px 0;
+    border:1px solid #95B8E7;
+    vertical-align: top;
+}

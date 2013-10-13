@@ -14,31 +14,37 @@
     <script type="text/javascript" src="/js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="/js/my.js"></script>
 </head>
-<body>
+<body style="padding: 10px">
 
-<table id="dg" title="Locations" style="width:700px;height:400px"
-       toolbar="#toolbar" pagination="true" idField="id"
-       rownumbers="true" fitColumns="true" singleSelect="true">
-    <thead>
-    <tr>
-        <th field="name" width="50">Name</th>
-        <th field="city" width="50">City</th>
-    </tr>
-    </thead>
-</table>
-<div id="toolbar">
-    <a id="addBtn" class="easyui-linkbutton" iconCls="icon-add-red" plain="true">New</a>
-    <input id="nameSearch" placeholder="Name" style="line-height:22px;border:1px solid #ccc">
-    <input id="citySearch" placeholder="City" style="line-height:22px;border:1px solid #ccc">
-    <a id="searchBtn" class="easyui-linkbutton" plain="true">Search</a>
-    <a id="resetSearchBtn" class="easyui-linkbutton" plain="true">Reset</a>
+<div id="mainContainer" style="width: 1314px;">
+
+    <table id="dg" title="Locations" style="width:700px;height:368px"
+           toolbar="#toolbar" pagination="true" idField="id"
+           rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+        <tr>
+            <th field="name" width="50">Name</th>
+            <th field="city" width="50">City</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a id="addBtn" class="easyui-linkbutton" iconCls="icon-add-red" plain="true">New</a>
+        <input id="nameSearch" placeholder="Name" style="line-height:22px;border:1px solid #ccc">
+        <input id="citySearch" placeholder="City" style="line-height:22px;border:1px solid #ccc">
+        <a id="searchBtn" class="easyui-linkbutton" plain="true">Search</a>
+        <a id="resetSearchBtn" class="easyui-linkbutton" plain="true">Reset</a>
+    </div>
+
+    <input id="addLocInput" style="float:left; min-width: 598px; vertical-align: top; display:none"/>
+
+    <div class="map_canvas" style="float:left; vertical-align: top;"></div>
 </div>
-
-<input id="addLocInput" style="float:left; width:auto; min-width: 250px; vertical-align: top; display:none"/>
 
 <div id="addFields" style="overflow: auto; padding:2px; border:1px solid #95B8E7; display:none">
 
 </div>
+
 
 </body>
 </html>

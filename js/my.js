@@ -29,12 +29,17 @@ $(function(){
         onLoadSuccess: function() {
             $addLocInput.css('display', 'none');
             $addFields.css('display', 'none');
-            $datagrid.datagrid('unselectAll');}
+            $datagrid.datagrid('unselectAll');
+            $('.map_canvas').css('height', '358');
+        }
     });
     $('.panel.datagrid').css('float', 'left').css('margin-bottom', '8px').css('margin-right', '8px');
+    $('.panel-title').css('height', '8px').css('line-height', '8px');
 
     $addLocInput.autosizeInput();
-    $addLocInput.geocomplete();
+    $addLocInput.geocomplete({
+        map: ".map_canvas"
+    });
     $addLocInput.css('height', '20px').css('border', '1px solid #ccc').css('margin-bottom', '8px').css('margin-left', '0px');
 });
 
@@ -43,6 +48,7 @@ function addNew() {
     $addLocInput.css('display', 'inline-block');
     $datagrid.datagrid('unselectAll');
     $('#destroyBtnWrapper').css('display', 'none');
+    $('.map_canvas').css('height', '326');
 }
 
 function doSearch(){
