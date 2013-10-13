@@ -66,7 +66,8 @@ public class MongodbLocationDAO implements LocationDAO {
 
     @Override
     public List<Location> getLocationsPagedBy(int page, int rows, Location criteria) {
-        return coll.find(convertLocationToDBObjRegexp(criteria)).skip(page*rows - rows).limit(rows).toArray();
+        return coll.find(convertLocationToDBObjRegexp(criteria)).skip(page*rows - rows).limit(rows)
+                .sort(new BasicDBObject("date_modified",-1)).toArray();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class MongodbLocationDAO implements LocationDAO {
 
     @Override
     public List<Location> getAllLocationsPaged(int page, int rows) {
-        return coll.find().skip(page*rows - rows).limit(rows).toArray();
+        return coll.find().skip(page*rows - rows).limit(rows).sort(new BasicDBObject("date_modified",-1)).toArray();
     }
 
     @Override

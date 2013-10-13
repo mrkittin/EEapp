@@ -10,10 +10,7 @@ import org.mongojack.ObjectId;
 import javax.persistence.Id;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.core.MultivaluedMap;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
@@ -42,6 +39,18 @@ public class Location {
     @FormParam("country")
     @JsonProperty("country")
     private String country;
+
+    @FormParam("date_modified")
+    @JsonProperty("date_modified")
+    private Date date_modified;
+
+    public Date getDate_modified() {
+        return date_modified;
+    }
+
+    public void setDate_modified(Date date_modified) {
+        this.date_modified = date_modified;
+    }
 
     public String getCountry() {
         return country;

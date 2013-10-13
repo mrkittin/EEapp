@@ -28,7 +28,8 @@ public class locationService {
     @Produces(MediaType.APPLICATION_JSON)
     public HashMap<String, String> getSupportedFields() throws JsonProcessingException {
         Location l = new Location();
-        l.setId("Id"); l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude"); l.setLng("Longitude");
+        l.setId("Id"); l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude");
+        l.setLng("Longitude"); l.setDate_modified(null);
         return l.asMap();
     }
 
@@ -79,6 +80,7 @@ public class locationService {
     public String addLocation (@Form Location location) throws JsonProcessingException {
 
         if (location.getId().isEmpty()) location.setId(null);
+        location.setDate_modified(new Date());
         //update Location with id returned from db
         location.setId(locationDAO.addLocation(location));
 
@@ -91,6 +93,7 @@ public class locationService {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String editLocation (@Form Location location) throws JsonProcessingException {
 
+        location.setDate_modified(new Date());
         locationDAO.updateLocation(location);
 
         ObjectMapper mapper = new ObjectMapper();

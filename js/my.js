@@ -6,6 +6,7 @@ $(function(){
 
     load_data('/api/location/getSupportedFields').done(function(data) {
         suppLocFields = data;
+        data.date_modified = 'Date Modified';
         $.each(suppLocFields, function(key, value) {
             suppLocFields_values.push(value);
         })
@@ -59,7 +60,11 @@ function getDisplayedInputs() {
 function addNewBlockThatMightBecomeAField() {
     //only fields that are not displayed currently could be added, so are present in <select>
     //if we can't add more fields, 'Add field' button will not be displayed
-    var addFieldsToDisplay = getFieldsToDisplay();
+    //var addFieldsToDisplay = getFieldsToDisplay();
+    var addFieldsToDisplay = [];
+    $.each(getFieldsToDisplay(), function(key, value){
+        if (value != 'Date Modified') { addFieldsToDisplay.push(value); }
+    });
     if (addFieldsToDisplay.length == 0) {return true;}
 
     $("<span style='display: inline-block' id='addFieldWrapper'>").appendTo($addFields_form);
@@ -86,9 +91,9 @@ function addNewBlockThatMightBecomeAField() {
         $(this).css('display', 'none');
         if (addFieldsToDisplay.length > 1) { $('#add_field_select').css('display', 'inline'); }
         else {
-            var theOnlyFieldLower = addFieldsToDisplay.get(0).toLowerCase();
+            var theOnlyFieldLower = addFieldsToDisplay[0].toLowerCase();
             $('#addFieldWrapper').attr('id', theOnlyFieldLower+'Wrapper');
-            $("<span name='" + addFieldsToDisplay.get(0) + "' style='margin-left: 3px'> " +  addFieldsToDisplay.get(0)
+            $("<span name='" + addFieldsToDisplay[0] + "' style='margin-left: 3px'> " +  addFieldsToDisplay[0]
                 + ' ' + "</span>").prependTo($('#'+theOnlyFieldLower+'Wrapper'));
             $('#add_field_btn').remove();
             $('#add_field_select').remove();
@@ -106,6 +111,7 @@ function addNewBlockThatMightBecomeAField() {
         style: 'display:none'
     }).appendTo($addFieldWrapper);
     $.each(addFieldsToDisplay, function(key, value) {
+        if (value == 'Date Modified') {  return true; }
         $('#add_field_select').append($("<option></option>").attr("value",key).text(value));
     });
     $('#add_field_select').prepend($("<option></option>").attr("value",'nullValue').text('select field'));
@@ -143,6 +149,11 @@ function showDetailsFor(rowIndex, rowData) {
         addEmptyBlockWithFormForEditingOrAddingLocations('/api/location/editLocation');
         $.each(rowData, function(key, element) {
             if (element == null) {return true;}
+            if (key == 'date_modified') {
+                addWrapperWithSpanAndInputFor(key, element);
+                $('input[name=date_modified]').prop('disabled', true);
+                return true;
+            }
             addWrapperWithSpanAndInputFor(key, element);
         });
     }
@@ -150,17 +161,26 @@ function showDetailsFor(rowIndex, rowData) {
     addNewBlockThatMightBecomeAField();
     addSaveButton();
     addDestroyButton();
+    addWrapperForDateModified();
+}
+
+function addWrapperForDateModified() {
+    $("<span style='display: inline-block; float:right' id='dateModifiedWrapper'>").appendTo($addFields_form);
+    $('#date_modifiedWrapper').appendTo($('#dateModifiedWrapper'));
 }
 
 function addWrapperWithSpanAndInputFor(name, withValue) {
     $("<span style='display: inline-block' id=" + name + "Wrapper>").appendTo($addFields_form);
+
     $("<span name='" + suppLocFields[name] + "' style='margin-left: 3px'> " +  suppLocFields[name] + ' '
         + "</span>").appendTo($('#'+name+'Wrapper'));
+
+    var final_value = name == 'date_modified' ? new Date(withValue).toLocaleString() : withValue;
 
     $('<input/>', {
         name: name,
         type: 'text',
-        value: withValue,
+        value: final_value,
         class: 'autoSizeInput'
     }).appendTo($('#'+name+'Wrapper'));
     $('.autoSizeInput').autosizeInput();
