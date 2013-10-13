@@ -6,7 +6,7 @@ $(function(){
 
     load_data('/api/location/getSupportedFields').done(function(data) {
         suppLocFields = data;
-        data.date_modified = 'Date Modified';
+        data.date_modified = 'Last Modified';
         $.each(suppLocFields, function(key, value) {
             suppLocFields_values.push(value);
         })
@@ -58,16 +58,16 @@ function getDisplayedInputs() {
 }
 
 function addNewBlockThatMightBecomeAField() {
-    //only fields that are not displayed currently could be added, so are present in <select>
+    //only fields that are not displayed currently could be added, so will be present in <select>
     //if we can't add more fields, 'Add field' button will not be displayed
-    //var addFieldsToDisplay = getFieldsToDisplay();
+
     var addFieldsToDisplay = [];
     $.each(getFieldsToDisplay(), function(key, value){
-        if (value != 'Date Modified') { addFieldsToDisplay.push(value); }
+        if (value != 'Last Modified') { addFieldsToDisplay.push(value); }
     });
     if (addFieldsToDisplay.length == 0) {return true;}
 
-    $("<span style='display: inline-block' id='addFieldWrapper'>").appendTo($addFields_form);
+    $("<span style='display: inline-block' id='addFieldWrapper'>").appendTo($('#inputsSet'));
     var $addFieldWrapper = $('#addFieldWrapper');
 
     $('<a/>', {
@@ -111,7 +111,7 @@ function addNewBlockThatMightBecomeAField() {
         style: 'display:none'
     }).appendTo($addFieldWrapper);
     $.each(addFieldsToDisplay, function(key, value) {
-        if (value == 'Date Modified') {  return true; }
+        if (value == 'Last Modified') {  return true; }
         $('#add_field_select').append($("<option></option>").attr("value",key).text(value));
     });
     $('#add_field_select').prepend($("<option></option>").attr("value",'nullValue').text('select field'));
@@ -159,18 +159,18 @@ function showDetailsFor(rowIndex, rowData) {
     }
     $('#idWrapper').css('display', 'none');
     addNewBlockThatMightBecomeAField();
-    addSaveButton();
     addDestroyButton();
+    addSaveButton();
     addWrapperForDateModified();
 }
 
 function addWrapperForDateModified() {
-    $("<span style='display: inline-block; float:right' id='dateModifiedWrapper'>").appendTo($addFields_form);
-    $('#date_modifiedWrapper').appendTo($('#dateModifiedWrapper'));
+    //$("<span style='display: inline-block; float:left' id='dateModifiedWrapper'>").appendTo($addFields_form);
+    $('#date_modifiedWrapper').appendTo($('#statusesSet'));
 }
 
 function addWrapperWithSpanAndInputFor(name, withValue) {
-    $("<span style='display: inline-block' id=" + name + "Wrapper>").appendTo($addFields_form);
+    $("<span style='display: inline-block' id=" + name + "Wrapper>").appendTo($('#inputsSet'));
 
     $("<span name='" + suppLocFields[name] + "' style='margin-left: 3px'> " +  suppLocFields[name] + ' '
         + "</span>").appendTo($('#'+name+'Wrapper'));
@@ -206,10 +206,22 @@ function addEmptyBlockWithFormForEditingOrAddingLocations(url) {
             $datagrid.datagrid('reload');
         }
     });
+
+    createFieldset('inputsSet', 'Editables', 'block', 'top');
+    createFieldset('statusesSet', 'Statuses', 'inline', 'bottom');
+    createFieldset('actionsSet', 'Actions', 'inline', 'bottom');
+}
+
+function createFieldset(id, legend, display, verticalAlign) {
+    $('<fieldset/>', {
+        id: id,
+        style: 'border: 1px dotted #cccccc; display: ' + display + '; vertical-align: ' + verticalAlign
+    }).appendTo($addFields_form);
+    $("<legend style='color: #ccc'>" + legend + "</legend>").appendTo($('#'+id));
 }
 
 function addDestroyButton() {
-    $("<span style='display: inline-block; float:right' id='destroyBtnWrapper'>").appendTo($addFields_form);
+    $("<span style='display: inline-block; float:left' id='destroyBtnWrapper'>").appendTo($('#actionsSet'));
 
     $('<a/>', {
         class: 'easyui-linkbutton l-btn l-btn-plain',
@@ -232,7 +244,7 @@ function addDestroyButton() {
 }
 
 function addSaveButton() {
-    $("<span style='display: inline-block; float:right' id='saveBtnWrapper'>").appendTo($addFields_form);
+    $("<span style='display: inline-block; float:left' id='saveBtnWrapper'>").appendTo($('#actionsSet'));
 
     $('<a/>', {
         class: 'easyui-linkbutton l-btn l-btn-plain',
