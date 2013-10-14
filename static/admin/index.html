@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0" />
     <title>Locations</title>
     <link rel="stylesheet" type="text/css" href="/css/easyui.css">
     <link rel="stylesheet" type="text/css" href="/css/icon.css">
@@ -16,7 +17,7 @@
 </head>
 <body style="padding: 10px">
 
-<div id="mainContainer" style="width: 1314px;">
+<div id="mainContainer" style="float: left; width: 1314px; height: 370px; margin-left: auto; margin-right: auto">
 
     <table id="dg" title="Locations" style="width:700px;height:368px"
            toolbar="#toolbar" pagination="true" idField="id"
@@ -36,12 +37,12 @@
         <a id="resetSearchBtn" class="easyui-linkbutton" plain="true">Reset</a>
     </div>
 
-    <input id="addLocInput" style="float:left; min-width: 598px; vertical-align: top; display:none"/>
+    <input id="addLocInput" style="float:left; min-width: 590px; vertical-align: top; display:none"/>
 
     <div class="map_canvas" style="float:left; vertical-align: top;"></div>
 </div>
 
-<div id="addFields" style="overflow: auto; padding:2px; border:1px solid #95B8E7; display:none">
+<div id="addFields" style="width: auto; overflow: auto; padding:2px; border:1px solid #95B8E7; display:none">
 
 </div>
 
