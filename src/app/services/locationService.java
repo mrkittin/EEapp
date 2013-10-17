@@ -29,7 +29,9 @@ public class locationService {
     public HashMap<String, String> getSupportedFields() throws JsonProcessingException {
         Location l = new Location();
         l.setId("Id"); l.setName("Name"); l.setCity("City"); l.setCountry("Country"); l.setLat("Latitude");
-        l.setLng("Longitude"); l.setDate_modified(null);
+        l.setLng("Longitude"); l.setDate_modified(null); l.setFormatted_address("Formatted Address");
+        l.setWebsite("Web site"); l.setInternational_phone_number("International Phone Number"); l.setZoom("Zoom");
+        l.setDescription("Description");
         return l.asMap();
     }
 

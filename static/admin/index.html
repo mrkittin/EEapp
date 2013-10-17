@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +12,9 @@
     <script type="text/javascript" src="/js/jquery.autosize.input.js"></script>
     <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-    <script type="text/javascript" src="/js/jquery.geocomplete.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.geocomplete.js"></script>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/jquery.elastic.source.js"></script>
     <script type="text/javascript" src="/js/my.js"></script>
 </head>
 <body style="padding: 10px">
@@ -26,6 +28,7 @@
         <tr>
             <th field="name" width="50">Name</th>
             <th field="city" width="50">City</th>
+            <th field="country" width="50">Country</th>
         </tr>
         </thead>
     </table>
@@ -33,6 +36,7 @@
         <a id="addBtn" class="easyui-linkbutton" iconCls="icon-add-red" plain="true">New</a>
         <input id="nameSearch" placeholder="Name" style="line-height:22px;border:1px solid #ccc">
         <input id="citySearch" placeholder="City" style="line-height:22px;border:1px solid #ccc">
+        <input id="countrySearch" placeholder="Country" style="line-height:22px;border:1px solid #ccc">
         <a id="searchBtn" class="easyui-linkbutton" plain="true">Search</a>
         <a id="resetSearchBtn" class="easyui-linkbutton" plain="true">Reset</a>
     </div>

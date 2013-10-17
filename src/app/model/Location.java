@@ -44,6 +44,66 @@ public class Location {
     @JsonProperty("date_modified")
     private Date date_modified;
 
+    @FormParam("formatted_address")
+    @JsonProperty("formatted_address")
+    private String formatted_address;
+
+    @FormParam("website")
+    @JsonProperty("website")
+    private String website;
+
+    @FormParam("international_phone_number")
+    @JsonProperty("international_phone_number")
+    private String international_phone_number;
+
+    @FormParam("zoom")
+    @JsonProperty("zoom")
+    private String zoom;
+
+    @FormParam("description")
+    @JsonProperty("description")
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(String zoom) {
+        this.zoom = zoom;
+    }
+
+    public String getInternational_phone_number() {
+        return international_phone_number;
+    }
+
+    public void setInternational_phone_number(String international_phone_number) {
+        this.international_phone_number = international_phone_number;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFormatted_address() {
+        return formatted_address;
+    }
+
+    public void setFormatted_address(String formatted_address) {
+        this.formatted_address = formatted_address;
+    }
+
     public Date getDate_modified() {
         return date_modified;
     }
