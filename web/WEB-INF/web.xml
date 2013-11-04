@@ -7,6 +7,15 @@
 
     <display-name>Hidden_app</display-name>
 
+    <!--<servlet>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>/</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <listener>
         <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
     </listener>
@@ -30,4 +39,28 @@
         <param-name>resteasy.servlet.mapping.prefix</param-name>
         <param-value>/api</param-value>
     </context-param>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/css/*</url-pattern>
+            <url-pattern>/</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+            <role-name>user</role-name>
+            <role-name>moderator</role-name>
+        </auth-constraint>
+
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>Test Realm</realm-name>
+    </login-config>
+
 </web-app>
