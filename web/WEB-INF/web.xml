@@ -40,17 +40,18 @@
         <param-value>/api</param-value>
     </context-param>
 
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
-            <url-pattern>/css/*</url-pattern>
-            <url-pattern>/</url-pattern>
+            <web-resource-name>Testee</web-resource-name>
+            <url-pattern>/*</url-pattern>
         </web-resource-collection>
+
         <auth-constraint>
             <role-name>admin</role-name>
-            <role-name>user</role-name>
-            <role-name>moderator</role-name>
         </auth-constraint>
 
         <user-data-constraint>
@@ -60,7 +61,7 @@
 
     <login-config>
         <auth-method>BASIC</auth-method>
-        <realm-name>Test Realm</realm-name>
-    </login-config>
+        <realm-name>TestRealm</realm-name>
+    </login-config> 
 
 </web-app>

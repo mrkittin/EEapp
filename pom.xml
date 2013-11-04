@@ -65,4 +65,48 @@
     </dependency>
 
 </dependencies>
+
+<build>
+    <sourceDirectory>src/app</sourceDirectory>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <warSourceDirectory>web</warSourceDirectory>
+            </configuration>
+        </plugin>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-resources-plugin</artifactId>
+           <executions>
+               <execution>
+                   <id>default-copy-resources</id>
+                   <phase>process-resources</phase>
+                   <goals>
+                       <goal>copy-resources</goal>
+                   </goals>
+                   <configuration>
+                        <overwrite>true</overwrite>
+                        <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>${project.basedir}</directory>
+                                <includes>
+                                    <include>**/*.css</include>
+                                    <include>**/*.png</include>
+                                    <include>**/*.gif</include>
+                                    <include>**/*.js</include>
+                                    <include>**/*.map</include>
+                                    <include>**/*.html</include>
+                                    <include>robots.txt</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>
