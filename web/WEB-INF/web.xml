@@ -5,16 +5,7 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
 
-    <display-name>Hidden_app</display-name>
-
-    <!--<servlet>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>/</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <display-name>TestEE_app</display-name>
 
     <listener>
         <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
@@ -62,6 +53,6 @@
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>TestRealm</realm-name>
-    </login-config> 
+    </login-config>
 
 </web-app>

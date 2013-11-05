@@ -5,9 +5,7 @@
         <Arg>
             <New class="org.eclipse.jetty.security.HashLoginService">
                 <Set name="name">TestRealm</Set>
-                <Set name="config">
-                    <SystemProperty name="jetty.home" default="." />/etc/realm.properties
-                </Set>
+                <Set name="config"><SystemProperty name="jetty.home" default="." />/webapps/root/realm.properties</Set>
                 <Set name="refreshInterval">60</Set>
                 <Call name="start" />
             </New>
