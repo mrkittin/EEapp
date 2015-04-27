@@ -7,3 +7,5 @@ Server provides RESTfull webservice. JBoss RESTEasy implements JAX-RS. Jackson p
 MongoDB is used via DAO layer. 
 
 Client is pure Javascript with jQuery, jQuery EasyUI plugin and some other libs.
+
+Deployed with Jetty - very slow start.
