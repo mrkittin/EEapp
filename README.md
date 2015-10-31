@@ -9,3 +9,5 @@ MongoDB is used via DAO layer.
 Client is pure Javascript with jQuery, jQuery EasyUI plugin and some other libs.
 
 Deployed with Jetty - very slow start.
+
+Basic HTTP auth (login/pass on request)
